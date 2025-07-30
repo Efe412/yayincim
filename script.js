@@ -1,91 +1,130 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-    const bgMusic = document.getElementById('bgMusic');
     const volumeSlider = document.getElementById('volumeSlider');
     const announcement = document.getElementById('announcement');
     const specialButton = document.getElementById('specialButton');
     const videoModal = document.getElementById('videoModal');
     const specialVideo = document.getElementById('specialVideo');
     const closeVideo = document.getElementById('closeVideo');
-    const secretButton = document.getElementById('secretButton');
 
     // Set initial volume to full for video
     volumeSlider.value = 100;
     
     // Show special button by default
-    specialButton.style.display = 'block';
+    if (specialButton) {
+        specialButton.style.display = 'block';
+    }
 
     // Auto-play video on page load (video contains the music)
     setTimeout(() => {
-        videoModal.style.display = 'flex';
-        specialVideo.src = 'attached_assets/8d4ceb1e7d0f966af09d2c35292be535_720w_1753838085400.mp4';
-        specialVideo.volume = 1;
-        specialVideo.play();
-        document.body.style.overflow = 'hidden';
+        if (videoModal && specialVideo) {
+            videoModal.style.display = 'flex';
+            specialVideo.src = 'attached_assets/8d4ceb1e7d0f966af09d2c35292be535_720w_1753838085400.mp4';
+            specialVideo.volume = 1;
+            specialVideo.muted = false;
+            
+            // Try to play the video
+            const playPromise = specialVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log('Video started playing');
+                }).catch(error => {
+                    console.log('Autoplay prevented:', error);
+                    // If autoplay fails, show the modal but don't play automatically
+                    videoModal.style.display = 'flex';
+                });
+            }
+            document.body.style.overflow = 'hidden';
+        }
     }, 2000);
 
     // Volume control for video
-    volumeSlider.addEventListener('input', function() {
-        specialVideo.volume = this.value / 100;
-    });
+    if (volumeSlider && specialVideo) {
+        volumeSlider.addEventListener('input', function() {
+            specialVideo.volume = this.value / 100;
+        });
+    }
 
     // Volume icon click to control video volume
     const volumeIcon = document.querySelector('.volume-control i');
     let isMuted = false;
     let previousVolume = 1;
 
-    volumeIcon.addEventListener('click', function() {
-        // Toggle video mute
-        if (isMuted) {
-            specialVideo.volume = previousVolume;
-            volumeSlider.value = previousVolume * 100;
-            this.className = 'fas fa-volume-up';
-            isMuted = false;
-        } else {
-            previousVolume = specialVideo.volume;
-            specialVideo.volume = 0;
-            volumeSlider.value = 0;
-            this.className = 'fas fa-volume-mute';
-            isMuted = true;
-        }
-    });
+    if (volumeIcon && specialVideo) {
+        volumeIcon.addEventListener('click', function() {
+            // Toggle video mute
+            if (isMuted) {
+                specialVideo.volume = previousVolume;
+                specialVideo.muted = false;
+                volumeSlider.value = previousVolume * 100;
+                this.className = 'fas fa-volume-up';
+                isMuted = false;
+            } else {
+                previousVolume = specialVideo.volume;
+                specialVideo.volume = 0;
+                specialVideo.muted = true;
+                volumeSlider.value = 0;
+                this.className = 'fas fa-volume-mute';
+                isMuted = true;
+            }
+        });
+    }
 
     // Special button functionality - pause/resume video
-    specialButton.addEventListener('click', function() {
-        if (specialVideo.paused) {
-            // Resume video
-            videoModal.style.display = 'flex';
-            specialVideo.play();
-            document.body.style.overflow = 'hidden';
-        } else {
-            // Pause video and hide modal
-            specialVideo.pause();
-            videoModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-
+    if (specialButton && specialVideo && videoModal) {
+        specialButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Special button clicked');
+            
+            if (specialVideo.paused) {
+                // Resume video
+                videoModal.style.display = 'flex';
+                const playPromise = specialVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log('Video resumed');
+                    }).catch(error => {
+                        console.log('Play failed:', error);
+                    });
+                }
+                document.body.style.overflow = 'hidden';
+            } else {
+                // Pause video and hide modal
+                specialVideo.pause();
+                videoModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
 
     // Close video modal
-    closeVideo.addEventListener('click', function() {
-        videoModal.style.display = 'none';
-        specialVideo.pause();
-        specialVideo.currentTime = 0;
-        document.body.style.overflow = 'auto';
-    });
+    if (closeVideo && videoModal && specialVideo) {
+        closeVideo.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            videoModal.style.display = 'none';
+            specialVideo.pause();
+            specialVideo.currentTime = 0;
+            document.body.style.overflow = 'auto';
+        });
+    }
 
     // Close video when clicking outside
-    videoModal.addEventListener('click', function(e) {
-        if (e.target === videoModal) {
-            closeVideo.click();
-        }
-    });
+    if (videoModal && closeVideo) {
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                closeVideo.click();
+            }
+        });
+    }
 
     // Keyboard controls for video
     document.addEventListener('keydown', function(e) {
-        if (videoModal.style.display === 'flex') {
-            if (e.key === 'Escape') {
+        if (videoModal && videoModal.style.display === 'flex') {
+            if (e.key === 'Escape' && closeVideo) {
                 closeVideo.click();
             }
         }
@@ -105,22 +144,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add click effects
     const profileImage = document.querySelector('.profile-image img');
-    profileImage.addEventListener('click', function() {
-        this.style.transform = 'scale(1.1) rotate(5deg)';
-        setTimeout(() => {
-            this.style.transform = 'scale(1) rotate(0deg)';
-        }, 200);
-    });
+    if (profileImage) {
+        profileImage.addEventListener('click', function() {
+            this.style.transform = 'scale(1.1) rotate(5deg)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            }, 200);
+        });
+    }
 
     // Animated text effect
     const username = document.querySelector('.username');
-    username.addEventListener('mouseenter', function() {
-        this.style.textShadow = '0 0 30px rgba(255, 20, 147, 0.8)';
-    });
+    if (username) {
+        username.addEventListener('mouseenter', function() {
+            this.style.textShadow = '0 0 30px rgba(255, 20, 147, 0.8)';
+        });
 
-    username.addEventListener('mouseleave', function() {
-        this.style.textShadow = '0 0 20px rgba(255, 20, 147, 0.3)';
-    });
+        username.addEventListener('mouseleave', function() {
+            this.style.textShadow = '0 0 20px rgba(255, 20, 147, 0.3)';
+        });
+    }
 
     // Random floating animation for Hello Kitty shapes
     const kittyShapes = document.querySelectorAll('.kitty-shape');
