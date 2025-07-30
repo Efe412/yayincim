@@ -69,26 +69,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Button image rotation every minute
-    let currentImageIndex = 0;
-    const buttonImages = [
-        'attached_assets/indir_1753837005504.jpeg',
-        'attached_assets/520236675_17846210166524016_158644689553333331_n_1753837686142.jpg'
-    ];
-    
-    // Update button image every minute
-    setInterval(() => {
-        const buttonImg = specialButton.querySelector('.button-image');
-        if (buttonImg) {
-            currentImageIndex = (currentImageIndex + 1) % buttonImages.length;
-            buttonImg.src = buttonImages[currentImageIndex];
-        }
-    }, 60000);
-    
     // Special button functionality (when secret code is entered)
     specialButton.addEventListener('click', function() {
-        // Open Pinterest video URL
-        window.open('https://tr.pinterest.com/pin/1036953882931557179/', '_blank');
+        // Show video modal with local video
+        videoModal.style.display = 'flex';
+        specialVideo.src = 'attached_assets/8d4ceb1e7d0f966af09d2c35292be535_720w_1753838085400.mp4';
+        specialVideo.play();
+        document.body.style.overflow = 'hidden';
         specialButton.style.display = 'none';
     });
     
