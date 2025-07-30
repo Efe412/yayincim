@@ -15,7 +15,7 @@ body {
     overflow: hidden;
     color: white;
     position: relative;
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="20" font-size="20">🐱</text></svg>'), auto;
+    cursor: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Ui75cP5THkqu_e8DFI4PdaA6BgaAPKNgfw&s'), auto;
 }
 
 /* Volume Control */
@@ -33,11 +33,23 @@ body {
     gap: 10px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
+    width: 60px;
+    overflow: hidden;
 }
 
 .volume-control:hover {
     background: rgba(255, 255, 255, 0.25);
     transform: scale(1.05);
+    width: 180px;
+}
+
+.volume-slider {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.volume-control:hover .volume-slider {
+    opacity: 1;
 }
 
 .volume-control i {
@@ -281,9 +293,37 @@ body {
 
 .kitty-shape {
     position: absolute;
-    font-size: 3rem;
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     animation: kittyFloat 8s ease-in-out infinite;
     filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.5));
+}
+
+.kitty1 {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZF0yOLZCoV_IpQz9DyzpdcwPDBH2M6cU5AzwwipKJZ5LWCVjTJQGjBwdvbKFMyU03MKU&usqp=CAU');
+}
+
+.kitty2 {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgNMKMMd8HEYGioMT5Yn68yKaLxDrqwKaAeSbajT9ik2mLEUcVoEntuPVGTdWeyE1KQow&usqp=CAU');
+}
+
+.kitty3 {
+    background-image: url('https://logowiki.net/wp-content/uploads/imgp/Sanrio---Hello-Kitty-Logo-1-9912.jpg');
+}
+
+.kitty4 {
+    background-image: url('https://cdn.worldvectorlogo.com/logos/hello-kitty-svg-1.svg');
+}
+
+.kitty5 {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZF0yOLZCoV_IpQz9DyzpdcwPDBH2M6cU5AzwwipKJZ5LWCVjTJQGjBwdvbKFMyU03MKU&usqp=CAU');
+}
+
+.kitty6 {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgNMKMMd8HEYGioMT5Yn68yKaLxDrqwKaAeSbajT9ik2mLEUcVoEntuPVGTdWeyE1KQow&usqp=CAU');
 }
 
 .kitty1 {

@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const secretButton = document.getElementById('secretButton');
     
     let secretCode = '';
-    const targetCode = 'Yağmur-nod.sc2f.mod-efe';
+    const targetCode = 'Yağmurun-moduefe';
     
     // Set initial volume to full and auto-play music
     bgMusic.volume = 1;
@@ -44,13 +44,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check if secret code matches
         if (secretCode === targetCode) {
-            secretButton.style.display = 'block';
+            specialButton.style.display = 'block';
             secretCode = ''; // Reset
         }
     });
     
-    // Secret button functionality
-    secretButton.addEventListener('click', function() {
+    // Special button functionality (when secret code is entered)
+    specialButton.addEventListener('click', function() {
         // Open new window with video
         const newWindow = window.open('', '_blank', 'width=1200,height=800');
         newWindow.document.write(`
@@ -77,20 +77,15 @@ document.addEventListener('DOMContentLoaded', function() {
             </head>
             <body>
                 <video controls autoplay>
-                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                    <source src="attached_assets/520236675_17846210166524016_158644689553333331_n_1753837005502.jpg" type="video/mp4">
                 </video>
             </body>
             </html>
         `);
-        secretButton.style.display = 'none';
+        specialButton.style.display = 'none';
     });
     
-    // Special button functionality
-    specialButton.addEventListener('click', function() {
-        videoModal.style.display = 'flex';
-        specialVideo.play();
-        document.body.style.overflow = 'hidden';
-    });
+    
     
     // Close video modal
     closeVideo.addEventListener('click', function() {
@@ -174,15 +169,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     function createKittyTrail(x, y) {
-        const trail = document.createElement('div');
+        const trail = document.createElement('img');
+        const kittyImages = [
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZF0yOLZCoV_IpQz9DyzpdcwPDBH2M6cU5AzwwipKJZ5LWCVjTJQGjBwdvbKFMyU03MKU&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgNMKMMd8HEYGioMT5Yn68yKaLxDrqwKaAeSbajT9ik2mLEUcVoEntuPVGTdWeyE1KQow&usqp=CAU',
+            'https://logowiki.net/wp-content/uploads/imgp/Sanrio---Hello-Kitty-Logo-1-9912.jpg',
+            'https://cdn.worldvectorlogo.com/logos/hello-kitty-svg-1.svg'
+        ];
+        
+        trail.src = kittyImages[Math.floor(Math.random() * kittyImages.length)];
         trail.style.position = 'fixed';
         trail.style.left = x + 'px';
         trail.style.top = y + 'px';
-        trail.style.fontSize = '16px';
+        trail.style.width = '30px';
+        trail.style.height = '30px';
         trail.style.pointerEvents = 'none';
         trail.style.zIndex = '999';
         trail.style.animation = 'kittyTrailFade 2s ease-out forwards';
-        trail.innerHTML = '🐱';
+        trail.style.objectFit = 'contain';
         
         document.body.appendChild(trail);
         
