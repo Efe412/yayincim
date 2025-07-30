@@ -1,16 +1,65 @@
+
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>replit</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yagmurv - Kick Streamer</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-
 <body>
-  Hello world
-  <script src="script.js"></script>
+    <div class="container">
+        <div class="profile-card">
+            <div class="profile-image">
+                <img src="https://cdn.discordapp.com/avatars/1100557402480312430/d5ebe562487e94d5cfad8ba0ac55e254.webp?size=1024" alt="yagmurv">
+            </div>
+            
+            <div class="profile-info">
+                <h1 class="username">yagmurv</h1>
+                <p class="bio">Kick Streamer</p>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link kick">
+                        <i class="fas fa-video"></i>
+                        <span>Kick</span>
+                    </a>
+                    <a href="#" class="social-link discord">
+                        <i class="fab fa-discord"></i>
+                        <span>Discord</span>
+                    </a>
+                    <a href="#" class="social-link twitter">
+                        <i class="fab fa-twitter"></i>
+                        <span>Twitter</span>
+                    </a>
+                </div>
+                
+                <div class="music-player">
+                    <div class="music-info">
+                        <div class="song-title">Now Playing</div>
+                        <div class="song-name">Phonk Music</div>
+                    </div>
+                    <audio id="bgMusic" loop>
+                        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/mpeg">
+                    </audio>
+                    <button id="musicToggle" class="music-toggle">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="background-animation">
+            <div class="floating-shapes">
+                <div class="shape"></div>
+                <div class="shape"></div>
+                <div class="shape"></div>
+                <div class="shape"></div>
+                <div class="shape"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
 </body>
-
 </html>
