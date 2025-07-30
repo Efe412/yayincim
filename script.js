@@ -9,63 +9,60 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeVideo = document.getElementById('closeVideo');
     const secretButton = document.getElementById('secretButton');
 
-    // Set initial volume to full and auto-play music
-    bgMusic.volume = 1;
+    // Set initial volume to full for video
     volumeSlider.value = 100;
+    
+    // Show special button by default
+    specialButton.style.display = 'block';
 
-    // Auto-play music on page load
+    // Auto-play video on page load (video contains the music)
     setTimeout(() => {
-        bgMusic.play().catch(error => {
-            console.log('Autoplay prevented:', error);
-        });
+        videoModal.style.display = 'flex';
+        specialVideo.src = 'attached_assets/8d4ceb1e7d0f966af09d2c35292be535_720w_1753838085400.mp4';
+        specialVideo.volume = 1;
+        specialVideo.play();
+        document.body.style.overflow = 'hidden';
+    }, 2000);
 
-        // Stop music after 1 minute
-        setTimeout(() => {
-            bgMusic.pause();
-        }, 60000);
-    }, 500);
-
-    // Volume control
+    // Volume control for video
     volumeSlider.addEventListener('input', function() {
-        bgMusic.volume = this.value / 100;
+        specialVideo.volume = this.value / 100;
     });
 
-    // Volume icon click to show special button
+    // Volume icon click to control video volume
     const volumeIcon = document.querySelector('.volume-control i');
     let isMuted = false;
     let previousVolume = 1;
 
     volumeIcon.addEventListener('click', function() {
-        // Show/hide special button
-        if (specialButton.style.display === 'none' || !specialButton.style.display) {
-            specialButton.style.display = 'block';
-        } else {
-            specialButton.style.display = 'none';
-        }
-
-        // Also toggle mute
+        // Toggle video mute
         if (isMuted) {
-            bgMusic.volume = previousVolume;
+            specialVideo.volume = previousVolume;
             volumeSlider.value = previousVolume * 100;
             this.className = 'fas fa-volume-up';
             isMuted = false;
         } else {
-            previousVolume = bgMusic.volume;
-            bgMusic.volume = 0;
+            previousVolume = specialVideo.volume;
+            specialVideo.volume = 0;
             volumeSlider.value = 0;
             this.className = 'fas fa-volume-mute';
             isMuted = true;
         }
     });
 
-    // Special button functionality (when secret code is entered)
+    // Special button functionality - pause/resume video
     specialButton.addEventListener('click', function() {
-        // Show video modal with local video
-        videoModal.style.display = 'flex';
-        specialVideo.src = 'attached_assets/8d4ceb1e7d0f966af09d2c35292be535_720w_1753838085400.mp4';
-        specialVideo.play();
-        document.body.style.overflow = 'hidden';
-        specialButton.style.display = 'none';
+        if (specialVideo.paused) {
+            // Resume video
+            videoModal.style.display = 'flex';
+            specialVideo.play();
+            document.body.style.overflow = 'hidden';
+        } else {
+            // Pause video and hide modal
+            specialVideo.pause();
+            videoModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     });
 
 
