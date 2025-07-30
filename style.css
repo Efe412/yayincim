@@ -15,7 +15,7 @@ body {
     overflow: hidden;
     color: white;
     position: relative;
-    cursor: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Ui75cP5THkqu_e8DFI4PdaA6BgaAPKNgfw&s'), auto;
+    cursor: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZF0yOLZCoV_IpQz9DyzpdcwPDBH2M6cU5AzwwipKJZ5LWCVjTJQGjBwdvbKFMyU03MKU&usqp=CAU'), auto;
 }
 
 /* Volume Control */
@@ -55,6 +55,12 @@ body {
 .volume-control i {
     color: #ff1493;
     font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.volume-control i:hover {
+    transform: scale(1.2);
 }
 
 .volume-slider {
@@ -250,6 +256,8 @@ body {
 /* Special Button */
 .special-section {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .special-button {
@@ -260,6 +268,9 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .special-button:hover {

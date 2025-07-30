@@ -33,6 +33,26 @@ document.addEventListener('DOMContentLoaded', function() {
         bgMusic.volume = this.value / 100;
     });
     
+    // Volume icon click to toggle mute
+    const volumeIcon = document.querySelector('.volume-control i');
+    let isMuted = false;
+    let previousVolume = 1;
+    
+    volumeIcon.addEventListener('click', function() {
+        if (isMuted) {
+            bgMusic.volume = previousVolume;
+            volumeSlider.value = previousVolume * 100;
+            this.className = 'fas fa-volume-up';
+            isMuted = false;
+        } else {
+            previousVolume = bgMusic.volume;
+            bgMusic.volume = 0;
+            volumeSlider.value = 0;
+            this.className = 'fas fa-volume-mute';
+            isMuted = true;
+        }
+    });
+    
     // Secret code detection
     document.addEventListener('keydown', function(e) {
         secretCode += e.key;
@@ -49,39 +69,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Button image rotation every minute
+    let currentImageIndex = 0;
+    const buttonImages = [
+        'attached_assets/indir_1753837005504.jpeg',
+        'attached_assets/520236675_17846210166524016_158644689553333331_n_1753837686142.jpg'
+    ];
+    
+    // Update button image every minute
+    setInterval(() => {
+        const buttonImg = specialButton.querySelector('.button-image');
+        if (buttonImg) {
+            currentImageIndex = (currentImageIndex + 1) % buttonImages.length;
+            buttonImg.src = buttonImages[currentImageIndex];
+        }
+    }, 60000);
+    
     // Special button functionality (when secret code is entered)
     specialButton.addEventListener('click', function() {
-        // Open new window with video
-        const newWindow = window.open('', '_blank', 'width=1200,height=800');
-        newWindow.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>Secret Video</title>
-                <style>
-                    body {
-                        margin: 0;
-                        padding: 0;
-                        background: #000;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
-                    }
-                    video {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
-                </style>
-            </head>
-            <body>
-                <video controls autoplay>
-                    <source src="attached_assets/520236675_17846210166524016_158644689553333331_n_1753837005502.jpg" type="video/mp4">
-                </video>
-            </body>
-            </html>
-        `);
+        // Open Pinterest video URL
+        window.open('https://tr.pinterest.com/pin/1036953882931557179/', '_blank');
         specialButton.style.display = 'none';
     });
     
