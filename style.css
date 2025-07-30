@@ -7,13 +7,105 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    background: linear-gradient(135deg, #ffb3d9 0%, #ff99cc 25%, #ffccf2 50%, #e6b3ff 75%, #d9b3ff 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     color: white;
+    position: relative;
+}
+
+/* Volume Control */
+.volume-control {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    padding: 15px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.volume-control:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+.volume-control i {
+    color: #ff1493;
+    font-size: 1.2rem;
+}
+
+.volume-slider {
+    width: 100px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    outline: none;
+    border-radius: 5px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #ff1493;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Announcement */
+.announcement {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    padding: 20px 40px;
+    border-radius: 15px;
+    border: 2px solid #ff1493;
+    font-size: 1.5rem;
+    font-weight: bold;
+    animation: slideDown 2s ease-out 6s forwards;
+}
+
+.rainbow-text {
+    background: linear-gradient(45deg, #ff0080, #ff8000, #ffff00, #00ff80, #0080ff, #8000ff);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: rainbow 2s ease-in-out infinite;
+}
+
+@keyframes slideDown {
+    0% {
+        top: -100px;
+    }
+    20%, 80% {
+        top: 50px;
+    }
+    100% {
+        top: -100px;
+    }
+}
+
+@keyframes rainbow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 .container {
@@ -22,13 +114,13 @@ body {
 }
 
 .profile-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(25px);
+    border: 2px solid rgba(255, 20, 147, 0.3);
+    border-radius: 25px;
     padding: 40px;
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 25px 50px rgba(255, 20, 147, 0.2);
     animation: fadeInUp 1s ease-out;
     max-width: 400px;
     width: 90vw;
@@ -43,8 +135,8 @@ body {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    border: 4px solid #00ff88;
-    box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+    border: 4px solid #ff1493;
+    box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
     animation: pulse 2s infinite;
     object-fit: cover;
 }
@@ -53,17 +145,18 @@ body {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 10px;
-    background: linear-gradient(45deg, #00ff88, #00ccff);
+    background: linear-gradient(45deg, #ff1493, #ff69b4, #ffc0cb);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    text-shadow: 0 0 20px rgba(255, 20, 147, 0.3);
 }
 
 .bio {
     font-size: 1.2rem;
-    color: #aaa;
+    color: #fff;
     margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .social-links {
@@ -78,43 +171,40 @@ body {
     align-items: center;
     gap: 8px;
     padding: 12px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 20, 147, 0.3);
     border-radius: 25px;
     text-decoration: none;
     color: white;
     transition: all 0.3s ease;
     font-size: 0.9rem;
+    font-weight: bold;
 }
 
 .social-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(255, 20, 147, 0.4);
 }
 
 .social-link.kick:hover {
     border-color: #00ff88;
-    box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3);
+    background: rgba(0, 255, 136, 0.2);
 }
 
 .social-link.discord:hover {
     border-color: #5865f2;
-    box-shadow: 0 10px 20px rgba(88, 101, 242, 0.3);
-}
-
-.social-link.twitter:hover {
-    border-color: #1da1f2;
-    box-shadow: 0 10px 20px rgba(29, 161, 242, 0.3);
+    background: rgba(88, 101, 242, 0.2);
 }
 
 .music-player {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 15px;
+    background: rgba(255, 20, 147, 0.2);
+    border-radius: 20px;
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 20, 147, 0.3);
+    margin-bottom: 30px;
 }
 
 .music-info {
@@ -123,18 +213,18 @@ body {
 
 .song-title {
     font-size: 0.8rem;
-    color: #aaa;
+    color: #fff;
     margin-bottom: 5px;
 }
 
 .song-name {
     font-size: 1rem;
     font-weight: bold;
-    color: #00ff88;
+    color: #ff1493;
 }
 
 .music-toggle {
-    background: linear-gradient(45deg, #00ff88, #00ccff);
+    background: linear-gradient(45deg, #ff1493, #ff69b4);
     border: none;
     border-radius: 50%;
     width: 50px;
@@ -143,14 +233,42 @@ body {
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+    box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
 }
 
 .music-toggle:hover {
     transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(0, 255, 136, 0.5);
+    box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
 }
 
+/* Special Button */
+.special-section {
+    margin-top: 20px;
+}
+
+.special-button {
+    background: linear-gradient(45deg, #ff1493, #ff69b4, #ffc0cb);
+    border: 3px solid #fff;
+    border-radius: 20px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4);
+}
+
+.special-button:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 35px rgba(255, 20, 147, 0.6);
+}
+
+.button-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Hello Kitty Background */
 .background-animation {
     position: fixed;
     top: 0;
@@ -161,57 +279,94 @@ body {
     pointer-events: none;
 }
 
-.floating-shapes {
+.hello-kitty-shapes {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-.shape {
+.kitty-shape {
     position: absolute;
-    background: linear-gradient(45deg, rgba(0, 255, 136, 0.1), rgba(0, 204, 255, 0.1));
-    border-radius: 50%;
-    animation: float 6s ease-in-out infinite;
+    font-size: 3rem;
+    animation: kittyFloat 8s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.5));
 }
 
-.shape:nth-child(1) {
-    width: 100px;
-    height: 100px;
-    top: 20%;
+.kitty1 {
+    top: 10%;
     left: 10%;
     animation-delay: 0s;
 }
 
-.shape:nth-child(2) {
-    width: 60px;
-    height: 60px;
-    top: 60%;
-    left: 80%;
-    animation-delay: 1s;
+.kitty2 {
+    top: 20%;
+    right: 15%;
+    animation-delay: 1.5s;
 }
 
-.shape:nth-child(3) {
-    width: 80px;
-    height: 80px;
-    top: 80%;
+.kitty3 {
+    bottom: 20%;
     left: 20%;
-    animation-delay: 2s;
-}
-
-.shape:nth-child(4) {
-    width: 120px;
-    height: 120px;
-    top: 10%;
-    left: 70%;
     animation-delay: 3s;
 }
 
-.shape:nth-child(5) {
-    width: 40px;
-    height: 40px;
-    top: 40%;
+.kitty4 {
+    bottom: 30%;
+    right: 25%;
+    animation-delay: 4.5s;
+}
+
+.kitty5 {
+    top: 50%;
     left: 5%;
-    animation-delay: 4s;
+    animation-delay: 6s;
+}
+
+.kitty6 {
+    top: 60%;
+    right: 10%;
+    animation-delay: 7.5s;
+}
+
+/* Video Modal */
+.video-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.close-video {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: #ff1493;
+    color: white;
+    border: none;
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+#specialVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 @keyframes fadeInUp {
@@ -227,22 +382,25 @@ body {
 
 @keyframes pulse {
     0%, 100% {
-        box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+        box-shadow: 0 0 30px rgba(255, 20, 147, 0.3);
     }
     50% {
-        box-shadow: 0 0 50px rgba(0, 255, 136, 0.6);
+        box-shadow: 0 0 50px rgba(255, 20, 147, 0.7);
     }
 }
 
-@keyframes float {
+@keyframes kittyFloat {
     0%, 100% {
-        transform: translateY(0px) rotate(0deg);
+        transform: translateY(0px) rotate(0deg) scale(1);
     }
-    33% {
-        transform: translateY(-20px) rotate(120deg);
+    25% {
+        transform: translateY(-30px) rotate(90deg) scale(1.1);
     }
-    66% {
-        transform: translateY(20px) rotate(240deg);
+    50% {
+        transform: translateY(-15px) rotate(180deg) scale(0.9);
+    }
+    75% {
+        transform: translateY(-45px) rotate(270deg) scale(1.2);
     }
 }
 
@@ -262,5 +420,16 @@ body {
     
     .social-link {
         justify-content: center;
+    }
+    
+    .volume-control {
+        top: 10px;
+        left: 10px;
+        padding: 10px;
+    }
+    
+    .announcement {
+        font-size: 1.2rem;
+        padding: 15px 30px;
     }
 }

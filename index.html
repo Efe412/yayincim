@@ -9,6 +9,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Volume Control -->
+    <div class="volume-control">
+        <i class="fas fa-volume-up"></i>
+        <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+    </div>
+
+    <!-- Announcement -->
+    <div class="announcement" id="announcement">
+        <span class="rainbow-text">𝓼𝓪𝔂𝓰ı𝓭𝓮ğ𝓮𝓻 𝓶𝓸𝓭𝓮𝓻𝓪𝓽ö𝓻 𝓮𝓯𝓮</span>
+    </div>
+
     <div class="container">
         <div class="profile-card">
             <div class="profile-image">
@@ -20,17 +31,13 @@
                 <p class="bio">Kick Streamer</p>
                 
                 <div class="social-links">
-                    <a href="#" class="social-link kick">
-                        <i class="fas fa-video"></i>
+                    <a href="https://kick.com/stellaas" target="_blank" class="social-link kick">
+                        <img src="https://kick.com/favicon.ico" alt="Kick" style="width: 16px; height: 16px;">
                         <span>Kick</span>
                     </a>
-                    <a href="#" class="social-link discord">
+                    <a href="https://discord.gg/Uj4UuH6RPc" target="_blank" class="social-link discord">
                         <i class="fab fa-discord"></i>
                         <span>Discord</span>
-                    </a>
-                    <a href="#" class="social-link twitter">
-                        <i class="fab fa-twitter"></i>
-                        <span>Twitter</span>
                     </a>
                 </div>
                 
@@ -46,17 +53,35 @@
                         <i class="fas fa-play"></i>
                     </button>
                 </div>
+
+                <!-- Special Button -->
+                <div class="special-section">
+                    <button id="specialButton" class="special-button">
+                        <img src="attached_assets/indir_1753835580618.jpeg" alt="Special" class="button-image">
+                    </button>
+                </div>
             </div>
         </div>
         
         <div class="background-animation">
-            <div class="floating-shapes">
-                <div class="shape"></div>
-                <div class="shape"></div>
-                <div class="shape"></div>
-                <div class="shape"></div>
-                <div class="shape"></div>
+            <div class="hello-kitty-shapes">
+                <div class="kitty-shape kitty1">🐱</div>
+                <div class="kitty-shape kitty2">🎀</div>
+                <div class="kitty-shape kitty3">💖</div>
+                <div class="kitty-shape kitty4">🌸</div>
+                <div class="kitty-shape kitty5">✨</div>
+                <div class="kitty-shape kitty6">🐱</div>
             </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-container">
+            <button id="closeVideo" class="close-video">×</button>
+            <video id="specialVideo" controls autoplay>
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+            </video>
         </div>
     </div>
     
