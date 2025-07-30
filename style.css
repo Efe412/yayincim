@@ -94,7 +94,7 @@ body {
     border: 2px solid #ff1493;
     font-size: 1.5rem;
     font-weight: bold;
-    animation: slideDown 2s ease-out 5s forwards;
+    animation: slideDown 11s ease-out 2s forwards;
 }
 
 .rainbow-text {
@@ -110,7 +110,7 @@ body {
     0% {
         top: -100px;
     }
-    15%, 85% {
+    9%, 91% {
         top: 50px;
     }
     100% {
@@ -453,26 +453,26 @@ body {
     .profile-card {
         padding: 30px 20px;
     }
-    
+
     .username {
         font-size: 2rem;
     }
-    
+
     .social-links {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .social-link {
         justify-content: center;
     }
-    
+
     .volume-control {
         top: 10px;
         left: 10px;
         padding: 10px;
     }
-    
+
     .announcement {
         font-size: 1.2rem;
         padding: 15px 30px;
